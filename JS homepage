@@ -1,0 +1,44 @@
+document.addEventListener("DOMContentLoaded", function () {
+  // Parallax effect for featured image
+  window.addEventListener("scroll", function () {
+    const parallax = document.querySelector(".parallax");
+    let scrollPosition = window.pageYOffset;
+    parallax.style.transform = "translateY(" + scrollPosition * 0.3 + "px)";
+  });
+
+  // Adding the float effect
+  const floatingLogo = document.getElementById("floating-logo");
+  floatingLogo.classList.add("float");
+});
+document.addEventListener("DOMContentLoaded", function () {
+  // Debounce function to limit the rate of execution
+  function debounce(func, wait = 10, immediate = true) {
+    let timeout;
+    return function () {
+      const context = this,
+        args = arguments;
+      const later = function () {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      const callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  }
+
+  // Parallax effect for featured image
+  window.addEventListener(
+    "scroll",
+    debounce(function () {
+      const parallax = document.querySelector(".parallax");
+      let scrollPosition = window.pageYOffset;
+      parallax.style.transform = "translateY(" + scrollPosition * 0.3 + "px)";
+    })
+  );
+
+  // Adding the float effect
+  const floatingLogo = document.getElementById("floating-logo");
+  floatingLogo.classList.add("float");
+});
